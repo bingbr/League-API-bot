@@ -1,5 +1,10 @@
 package league
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Account struct {
 	ID            string `json:"id"`
 	AccountID     string `json:"accountId"`
@@ -30,6 +35,37 @@ type AccountRanking []struct {
 		Losses   int    `json:"losses"`
 		Progress string `json:"progress"`
 	} `json:"miniSeries,omitempty"`
+}
+
+func betterFormat(num float32) string {
+	s := fmt.Sprintf("%.4f", num)
+	return strings.TrimRight(strings.TrimRight(s, "0"), ".")
+}
+
+func (rank AccountRanking) RankOutput(i int, q string) string {
+	var r string
+	wr := float64(rank[i].Wins) * 100 / float64(rank[i].Wins+rank[i].Losses)
+	switch rank[i].HotStreak {
+	case true:
+		if rank[i].MiniSeries.Target >= 1 {
+			r = fmt.Sprintf("\n"+q+"\n**Elo**: %v %v %d LP\n**Winrate**: %.2f%%  %dW  %dL   Winning Streak\n**MD5**   %dW   %dL",
+				rank[i].Tier, rank[i].Rank, rank[i].LeaguePoints, wr, rank[i].Wins, rank[i].Losses, rank[i].MiniSeries.Wins, rank[i].MiniSeries.Losses)
+		} else {
+			r = fmt.Sprintf(
+				"\n"+q+"\n**Elo**: %v %v %d LP\n**Winrate**: %.2f%%  %dW  %dL   Winning Streak",
+				rank[i].Tier, rank[i].Rank, rank[i].LeaguePoints, wr, rank[i].Wins, rank[i].Losses,
+			)
+		}
+	default:
+		if rank[i].MiniSeries.Target >= 1 {
+			r = fmt.Sprintf("\n"+q+"\n**Elo**: %v %v %d LP\n**Winrate**: %.2f%%  %dW  %dL\n**MD5**   %dW  %dL",
+				rank[i].Tier, rank[i].Rank, rank[i].LeaguePoints, wr, rank[i].Wins, rank[i].Losses, rank[i].MiniSeries.Wins, rank[i].MiniSeries.Losses)
+		} else {
+			r = fmt.Sprintf("\n"+q+"\n**Elo**: %v %v %d LP\n**Winrate**: %.2f%%  %dW  %dL",
+				rank[i].Tier, rank[i].Rank, rank[i].LeaguePoints, wr, rank[i].Wins, rank[i].Losses)
+		}
+	}
+	return r
 }
 
 type LiveGame struct {

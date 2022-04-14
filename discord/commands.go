@@ -5,8 +5,8 @@ import (
 	"log"
 	"strings"
 
+	"github.com/bingbr/League-API-bot/league"
 	"github.com/bwmarrin/discordgo"
-	"github.com/nikkodev/League-API-bot/league"
 )
 
 var (
@@ -38,17 +38,21 @@ var (
 		"search": func(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
 			data := interaction.ApplicationCommandData()
 			lRegion = data.Options[0].StringValue()
-			lAccount = data.Options[1].StringValue()
 
-			switch interaction.Type {
-			case discordgo.InteractionApplicationCommand:
-				if len(lAccount) < 3 || len(lAccount) > 16 {
-					go msgInvalidAcc(session, interaction)
-				} else {
-					go msgAddContent(session, interaction)
+			if len(data.Options) == 1 {
+				log.Print("Command failed, index out of range.")
+			} else {
+				lAccount = data.Options[1].StringValue()
+				switch interaction.Type {
+				case discordgo.InteractionApplicationCommand:
+					if len(lAccount) < 2 || len(lAccount) > 22 || len(lRegion) < 1 || len(lRegion) > 5 {
+						go msgInvalidAcc(session, interaction)
+					} else {
+						go msgAddContent(session, interaction)
+					}
+				case discordgo.InteractionApplicationCommandAutocomplete:
+					go loadRegion(session, interaction)
 				}
-			case discordgo.InteractionApplicationCommandAutocomplete:
-				go loadRegion(session, interaction)
 			}
 		},
 	}
@@ -57,6 +61,7 @@ var (
 		"yes-confirm": func(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
 			go removeInteraction(session, oldInteraction)
 			go showAccountInfo(session, interaction)
+
 		},
 		"no-confirm": func(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
 			go removeInteraction(session, oldInteraction)
@@ -73,8 +78,8 @@ var (
 		},
 	}
 
-	oldInteraction              *discordgo.InteractionCreate
-	lRegion, lAccount, nickname string
+	oldInteraction    *discordgo.InteractionCreate
+	lRegion, lAccount string
 )
 
 func CreateCommands(session *discordgo.Session) {
@@ -97,7 +102,7 @@ func CreateCommands(session *discordgo.Session) {
 }
 
 func RemoveCommands(session *discordgo.Session, guild string) {
-	// TODO: Fix not Removing Global Commands
+	// TODO: Fix not removing global commands
 	registeredCommands, err := session.ApplicationCommands(session.State.User.ID, guild)
 	if err != nil {
 		log.Fatalf("Não foi possível remover os comandos: %v", err)
@@ -130,10 +135,24 @@ func msgInvalidAcc(session *discordgo.Session, interaction *discordgo.Interactio
 	}
 }
 
+func msgError(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
+	err := session.InteractionRespond(interaction.Interaction, &discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			Content: "Something went wrong.",
+			Flags:   1 << 6,
+		},
+	})
+	if err != nil {
+		panic(err)
+	}
+}
+
 func msgAddContent(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
+	user := interaction.Member.User.Username + "#" + interaction.Member.User.Discriminator + " id:" + interaction.Member.User.ID
 	oldInteraction = interaction
-	nickname = strings.Join(strings.Split(strings.ToLower(lAccount), " "), "+")
-	go league.AccInfo(lRegion, "", nickname)
+	nickname := strings.Join(strings.Split(strings.ToLower(lAccount), " "), "+")
+	go league.AccInfo(lRegion, "", user, nickname)
 	err := session.InteractionRespond(interaction.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
@@ -163,7 +182,8 @@ func msgAddContent(session *discordgo.Session, interaction *discordgo.Interactio
 		},
 	})
 	if err != nil {
-		panic(err)
+		msgError(session, interaction)
+		log.Printf("Error: %s", err)
 	}
 }
 
@@ -235,14 +255,15 @@ func loadRegion(session *discordgo.Session, interaction *discordgo.InteractionCr
 }
 
 func showAccountInfo(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
-	user := interaction.Member.User.Username + "#" + interaction.Member.User.Discriminator + " id:" + interaction.Member.User.ID
 	err := session.InteractionRespond(interaction.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
-			Content: league.AboutAcc(user),
+			Content: league.AboutAcc(),
 		},
 	})
 	if err != nil {
-		panic(err)
+		msgError(session, interaction)
+		log.Printf("Error: %s", err)
 	}
+	league.CleanAll()
 }

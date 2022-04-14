@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nikkodev/League-API-bot/discord"
+	"github.com/bingbr/League-API-bot/discord"
 )
 
 func main() {

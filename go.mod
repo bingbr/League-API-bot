@@ -1,4 +1,4 @@
-module github.com/nikkodev/League-API-bot
+module github.com/bingbr/League-API-bot
 
 go 1.18
 
