@@ -95,7 +95,7 @@ func aboutRanking(rank AccountRanking) {
 	}
 }
 
-func AccInfo(region, id, user, nick string) {
+func AccInfo(region, user, nick string) {
 	var run sync.WaitGroup
 	go fetchInfo(region, "lol/summoner/v4/summoners/", nick, &run)
 	re = region

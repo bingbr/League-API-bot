@@ -152,7 +152,7 @@ func msgAddContent(session *discordgo.Session, interaction *discordgo.Interactio
 	user := interaction.Member.User.Username + "#" + interaction.Member.User.Discriminator + " id:" + interaction.Member.User.ID
 	oldInteraction = interaction
 	nickname := strings.Join(strings.Split(strings.ToLower(lAccount), " "), "+")
-	go league.AccInfo(lRegion, "", user, nickname)
+	go league.AccInfo(lRegion, user, nickname)
 	err := session.InteractionRespond(interaction.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
