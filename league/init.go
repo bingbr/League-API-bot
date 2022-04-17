@@ -158,13 +158,14 @@ func Response(t string) (int, string) {
 			so, fl, _ := aboutRanking(accRank)
 			_, _, tf := aboutRanking(accTFT)
 			er = ""
+			accRank = AccountRanking{}
+			accTFT = AccountRanking{}
 			return 0, fmt.Sprintf("**Nick**: %v    **Level**: %d\n**Last Modified**: %s %v",
 				acc.Name, acc.SummonerLevel, time.UnixMilli(acc.RevisionDate).Format("02/01/2006 15:04:05"), fmt.Sprintf("\n%s \n%s \n%s", so, fl, tf))
 		case "mst":
 			go fetchInfo(location, "lol/champion-mastery/v4/champion-masteries/", acc.ID, &run)
 			run.Add(2)
 			run.Wait()
-
 			legend := "_[Champion Name]_ _[Last Played Date]_ _[Chest Available (🎁 = true | X = false)]_\n"
 			arrayList := champList.championsMastery(master, accChamp)
 			switch master {

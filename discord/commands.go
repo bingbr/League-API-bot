@@ -266,7 +266,7 @@ func RemoveCommands(session *discordgo.Session, guild string) {
 }
 
 func removeInteraction(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
-	err := session.InteractionResponseDelete(session.State.User.ID, interaction.Interaction)
+	err := session.InteractionResponseDelete(interaction.Interaction)
 	if err != nil {
 		log.Printf("Remove Interaction Error: %s", err)
 	}
@@ -447,7 +447,7 @@ func showMasteryInfo(session *discordgo.Session, interaction *discordgo.Interact
 }
 
 func masteryContinuation(index int, session *discordgo.Session, interaction *discordgo.InteractionCreate) {
-	_, err := session.FollowupMessageCreate(session.State.User.ID, interaction.Interaction, true, &discordgo.WebhookParams{
+	_, err := session.FollowupMessageCreate(interaction.Interaction, true, &discordgo.WebhookParams{
 		Content: league.FollowupResponse(index),
 	})
 	if err != nil {
