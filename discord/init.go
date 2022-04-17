@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/bingbr/League-API-bot/league"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -29,6 +30,8 @@ func Connect() {
 	saveLog := io.MultiWriter(os.Stdout, logApp)
 	defer logApp.Close()
 	log.SetOutput(saveLog)
+
+	league.LoadLeagueChampions()
 
 	session.Identify.Intents = discordgo.IntentsGuildMessages
 	err = session.Open()
