@@ -1,0 +1,42 @@
+[
+    {
+        "ico":"<:Iron:967598348309757993>",
+        "tier": "IRON"
+    },
+    {
+        "ico":"<:Bronze:967597953764179998>",
+        "tier": "BRONZE"
+    },
+    {
+        "ico":"<:Silver:967598348330758164>",
+        "tier":"SILVER"
+    },
+    {
+        "ico":"<:Gold:967598348074909798>",
+        "tier":"GOLD"
+    },
+    {
+        "ico":"<:Platinum:967598348351701042>",
+        "tier":"PLATINUM"
+    },
+    {
+        "ico":"<:Diamond:967598347894525973>",
+        "tier":"DIAMOND"
+    },
+    {
+        "ico":"<:Master:967598347869372458>",
+        "tier":"MASTER"
+    },
+    {
+        "ico":"<:Grandmaster:967598348402036776>",
+        "tier":"GRANDMASTER"
+    },
+    {
+        "ico":"<:Challenger:967598348259446815>",
+        "tier": "CHALLENGER"
+    },
+    {
+        "ico":"",
+        "tier":"UNRANKED"
+    }
+]

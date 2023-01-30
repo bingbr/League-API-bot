@@ -1,18 +1,24 @@
 module github.com/bingbr/League-API-bot
 
-// +heroku goVersion go1.18
-go 1.18
+go 1.19
 
 require (
-	github.com/bwmarrin/discordgo v0.25.0
-	github.com/valyala/fasthttp v1.35.0
-)
-
-require (
-	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/bwmarrin/discordgo v0.27.0
 	github.com/gorilla/websocket v1.5.0 // indirect
-	github.com/klauspost/compress v1.15.1 // indirect
-	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
-	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad // indirect
+	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
+	github.com/jackc/pgconn v1.13.0 // indirect
+	github.com/jackc/pgio v1.0.0 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgproto3/v2 v2.3.1 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/pgtype v1.13.0 // indirect
+	github.com/jackc/pgx/v5 v5.2.0
+	github.com/jackc/puddle v1.3.0 // indirect
+	github.com/jackc/puddle/v2 v2.1.2 // indirect
+	golang.org/x/crypto v0.5.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/text v0.6.0
+	github.com/joho/godotenv v1.4.0
+	go.uber.org/atomic v1.10.0 // indirect
+	golang.org/x/sync v0.1.0 // indirect
 )
