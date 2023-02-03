@@ -7,41 +7,47 @@ A Discord bot that uses Riot Games API.
 ## Commands available
 |      Command     | Autocomplete Option | Description |
 |:----------------:|:-------------------:|:-----------:|
-| `/summoner`      | `region`            | Show information about an account, such as level and ranked stats. |
-| `/mastery`       | `region`, `level`   | Show the masteries and others stats of the champions of an account. |
-| `/free champion` | :x:                 | Show weekly free champions rotation. |
-| `/track config`  | `channel`           | Define the `#discord-channel` where you want to receive live game and post game stats of a tracked account. |
-| `/track add`     | `region`            | Add an account to be tracked. |
-| `/track remove`  | `region`            | Stop tracking an account. |
-| `/leadboard`     | :x:                 | Show ranking of tracked accounts on discord server. |
+| [`/summoner`](#summoner)      | `region`            | View information about an account, such as level and rank statistics. |
+| [`/mastery`](#mastery)       | `region`, `level`   | View the status of up to 25 champions from a single account at the mastery level of your choice. |
+| [`/free champion`](#free-champion-rotation) | :x:                 | Show weekly free champions rotation. |
+| [`/track config`](#configuration)  | `channel`           | Set the #discord-channel where you want to receive live and post-game stats from a tracked account. |
+| [`/track add`](#configuration)     | `region`            | Add an account to track. |
+| [`/track remove`](#configuration)  | `region`            | Stop tracking an account. |
+| [`/leadboard`](#leaderboard)     | :x:                 | View the ranking of tracked accounts on the Discord server. |
 
 
-## How to run on cloud
-1. Open [Railway](https://railway.app/) or a similar service
-1. Clone this repo in your  `New Project`
-1. Add [Postgresql](https://docs.railway.app/databases/postgresql) database to your created enviroment
-1. Put your [Riot Games API Token](https://developer.riotgames.com/) and your [Discord Bot Token](https://discord.com/developers/applications) inside of your League-API-bot `Variables`
+## How to run in the cloud
+1. Open [Railway](https://railway.app/) or a similar cloud service
+1. Clone this repo into your `New Project`
+1. Add [Postgresql](https://docs.railway.app/databases/postgresql) database to your created environment
+1. Place your [Riot Games API token](https://developer.riotgames.com/) and your [Discord bot token](https://discord.com/developers/applications) in your League API bot `variables`.
 ```
 DISCORD_TOKEN=****
 RIOT_TOKEN=****
 ```
 
 ## Print
+### Configuration
+![Print using auto-complete to configure the account tracker](/print/track-config-autocomplete.webp)
+![Print of adding an account to be track](/print/track-add-autocomplete.webp)
+![Print with bot response to commands](/print/track.webp)
+
+### Live game and post game
+![Print of live game and post-game statistics](/print/track-live-post-game.webp)
+
+### Free champion rotation
+![Print showing the champion's free week rotation](/print/free-week.webp)
+
 ### Summoner 
-![Displaying an account stats](/print/summoner.png)
+![Print showing an account stats](/print/summoner.webp)
 
 ### Mastery
-![Showing autocomplete for region and mastery](/print/autocomplete-mastery.png)
-![Displaying mastery status of 25 champions from an account](/print/mastery.png)
+![Print showing the mastery status of champions from one account](/print/mastery.webp)
 
-### Defining channel
-![Configuring tracker using autocomplete](/print/config.png)
+### Leaderboard
+![Print showing the leaderboard of a Discord server](/print/leaderboard.webp)
 
-### Tracked account live game
-![Displaying live game stats](/print/livegame.png)
 
-### Tracked account post game
-![Displaying post game stats](/print/postgame.webp)
 
 ## Legal disclaimer
 > League API Bot was created under Riot Games' ["Legal Jibber Jabber"](https://www.riotgames.com/en/legal) policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.

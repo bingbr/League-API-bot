@@ -22,9 +22,6 @@ type RiotAPI struct {
 }
 
 type Data struct {
-	Type     string          `json:"type"`
-	Format   string          `json:"format"`
-	Version  string          `json:"version"`
 	DataItem map[string]Item `json:"data"`
 }
 
@@ -135,21 +132,22 @@ type LiveGame struct {
 	PlatformID        string           `json:"platformId"`
 	Participants      []LiveGamePlayer `json:"participants"`
 	BannedChampions   []LiveGameBan    `json:"bannedChampions"`
-	Channel           string
+	ChannelID         string
+	GuildID           string
+	MessageID         string
+	ID                string
 	On                bool
 }
 
 type LiveGamePlayer struct {
-	TeamID       int    `json:"teamId"`
-	ChampionID   int    `json:"championId"`
-	SummonerName string `json:"summonerName"`
-	SummonerID   string `json:"summonerId"`
+	TeamID     int    `json:"teamId"`
+	ChampionID int    `json:"championId"`
+	SummonerID string `json:"summonerId"`
 }
 
 type LiveGameBan struct {
 	ChampionID int `json:"championId"`
 	TeamID     int `json:"teamId"`
-	PickTurn   int `json:"pickTurn"`
 }
 
 type Match struct {
@@ -157,13 +155,10 @@ type Match struct {
 		MatchID string `json:"matchId"`
 	} `json:"metadata"`
 	Info struct {
-		Duration       int64    `json:"gameDuration"`
-		GameID         int      `json:"gameId"`
-		Participants   []Player `json:"participants"`
-		QueueID        int      `json:"queueId"`
-		PlatformID     string   `json:"platformId"`
-		TournamentCode string   `json:"tournamentCode"`
-		Teams          []struct {
+		Duration     int64    `json:"gameDuration"`
+		Participants []Player `json:"participants"`
+		QueueID      int      `json:"queueId"`
+		Teams        []struct {
 			Bans   []LiveGameBan `json:"bans"`
 			TeamID int           `json:"teamId"`
 		} `json:"teams"`
@@ -172,7 +167,6 @@ type Match struct {
 
 type Player struct {
 	Summoner     string    `json:"summonerId"`
-	Name         string    `json:"summonerName"`
 	ChampionId   StringInt `json:"championId"`
 	ChampionName string    `json:"championName"`
 	Kill         int       `json:"kills"`
@@ -194,10 +188,13 @@ type Player struct {
 }
 
 type PostRunes struct {
-	Description string `json:"description"`
-	Style       int    `json:"style"`
-	StyleIcon   string
-	Selections  []struct {
+	Style      int `json:"style"`
+	Selections []struct {
 		Perk int `json:"perk"`
 	} `json:"selections"`
+}
+
+type Server struct {
+	GuildID   string
+	ChannelID string
 }

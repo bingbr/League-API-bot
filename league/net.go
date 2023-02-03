@@ -10,7 +10,7 @@ import (
 
 const userAgent = "League-API-bot/1.0"
 
-// Load required League of Legends data to use League API.
+// Load the required League of Legends data to use the League API.
 func LoadData() {
 	var (
 		ranks []Rank
@@ -39,7 +39,7 @@ func fetchCustom(url string, data interface{}) {
 	}
 }
 
-// Send a GET to Riot API.
+// Send a GET to the Riot API.
 func fetchData(region, path, id string, contents interface{}) {
 	req, err := http.NewRequest("GET", "https://"+region+".api.riotgames.com/"+path+id, nil)
 	if err != nil {
@@ -50,10 +50,10 @@ func fetchData(region, path, id string, contents interface{}) {
 		"X-Riot-Token": {os.Getenv("RIOT_TOKEN")},
 	}
 	client := &http.Client{
-		Timeout: time.Second * 120,
+		Timeout: time.Second * 180,
 		Transport: &http.Transport{
-			IdleConnTimeout:       time.Second * 120,
-			ResponseHeaderTimeout: time.Second * 120,
+			IdleConnTimeout:       time.Second * 180,
+			ResponseHeaderTimeout: time.Second * 180,
 		},
 	}
 	res, err := client.Do(req)
@@ -76,7 +76,7 @@ func fetchData(region, path, id string, contents interface{}) {
 		case http.StatusServiceUnavailable:
 			log.Println("Riot Games API is down.")
 		default:
-			log.Printf("API /%s%s resulted in a error %d.", path, id, res.StatusCode)
+			log.Printf("API /%s%s resulted in an error %d.", path, id, res.StatusCode)
 		}
 	} else {
 		err = json.NewDecoder(res.Body).Decode(&contents)

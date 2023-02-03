@@ -13,6 +13,10 @@ import (
 const guild = ""
 
 func Connect() {
+	// err := godotenv.Load(".env") // Required in order to run on localhost.
+	// if err != nil {
+	// 	panic(err)
+	// }
 	session, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
 	if err != nil {
 		panic(err)

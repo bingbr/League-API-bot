@@ -18,7 +18,7 @@ var (
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Name:        "champion",
-					Description: "Show free champion rotation for this week. Only for unranked modes.",
+					Description: "Show free champion rotation for this week. For unranked modes only.",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 			},
@@ -30,7 +30,7 @@ var (
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Name:        "add",
-					Description: "Add an account to be tracked.",
+					Description: "Add an account to track.",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Options: []*discordgo.ApplicationCommandOption{
 						{
@@ -72,12 +72,12 @@ var (
 				},
 				{
 					Name:        "config",
-					Description: "Define where to post tracked information.",
+					Description: "Define where you want tracked information to be posted.",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 					Options: []*discordgo.ApplicationCommandOption{
 						{
 							Name:         "channel",
-							Description:  "Mark the #channel that will used by the bot.",
+							Description:  "Highlight the #channel that will be in use by the bot.",
 							Type:         discordgo.ApplicationCommandOptionString,
 							Autocomplete: false,
 							Required:     true,
@@ -88,7 +88,7 @@ var (
 		},
 		{
 			Name:        "summoner",
-			Description: "Show information about a League of Legends account.",
+			Description: "View information about a League of Legends account.",
 			Type:        discordgo.ChatApplicationCommand,
 			Options: []*discordgo.ApplicationCommandOption{
 				{
@@ -109,7 +109,7 @@ var (
 		},
 		{
 			Name:        "mastery",
-			Description: "Show mastery of champions from a League of Legends account.",
+			Description: "Show champions mastery from a League of Legends account.",
 			Type:        discordgo.ChatApplicationCommand,
 			Options: []*discordgo.ApplicationCommandOption{
 				{
@@ -136,8 +136,8 @@ var (
 			},
 		},
 		{
-			Name:        "leadboard",
-			Description: "Show a leadboard with ranking of accounts tracked on this server.",
+			Name:        "leaderboard",
+			Description: "Display a leaderboard with the ranking of the accounts tracked on this server.",
 			Type:        discordgo.ChatApplicationCommand,
 		},
 	}
