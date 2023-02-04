@@ -1,7 +1,7 @@
 # League API bot
-A Discord bot that uses Riot Games API. 
+A Discord bot that utilizes the Riot Games API to bring the world of League of Legends into your server. With this bot, you can easily access information about your favorite players and their matches, including statistics, rankings and even the weekly free champions. You can also set up a notification so you never miss a player's game.
 
-## Try it now
+## Try it now!
 ### [Add this bot to your Discord server](https://discord.com/api/oauth2/authorize?client_id=961732062782562304&permissions=2147745792&scope=bot)
 
 ## Commands available
@@ -9,9 +9,9 @@ A Discord bot that uses Riot Games API.
 |:----------------:|:-------------------:|:-----------:|
 | [`/summoner`](#summoner)      | `region`            | View information about an account, such as level and rank statistics. |
 | [`/mastery`](#mastery)       | `region`, `level`   | View the status of up to 25 champions from a single account at the mastery level of your choice. |
-| [`/free champion`](#free-champion-rotation) | :x:                 | Show weekly free champions rotation. |
-| [`/track config`](#configuration)  | `channel`           | Set the #discord-channel where you want to receive live and post-game stats from a tracked account. |
-| [`/track add`](#configuration)     | `region`            | Add an account to track. |
+| [`/free champion`](#free-champion-rotation) | :x:                 | Show the latest weekly free champions rotation. |
+| [`/track config`](#configuration)  | `channel`           | Choose the #Discord-channel for live & post-game stats from a tracked account. |
+| [`/track add`](#configuration)     | `region`            | Track an account. The bot will let you know when the account start a match and when the match ends, including the result. |
 | [`/track remove`](#configuration)  | `region`            | Stop tracking an account. |
 | [`/leadboard`](#leaderboard)     | :x:                 | View the ranking of tracked accounts on the Discord server. |
 
