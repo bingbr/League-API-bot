@@ -295,11 +295,19 @@ func (r AccountRank) fixedStats() (res string) {
 }
 
 func (acc AccountRank) fixedName() (res string) {
-	if len([]rune(acc.Name)) > 14 {
+	if len([]rune(acc.Name)) > 13 {
 		if strings.ToUpper(acc.Name) == acc.Name {
-			res = acc.Name[:14]
+			res = acc.Name[:13]
 		} else {
-			res = acc.Name[:15]
+			if strings.ToLower(acc.Name) == acc.Name {
+				res = acc.Name
+			} else {
+				if len([]rune(acc.Name)) > 14 {
+					res = acc.Name[:15]
+				} else {
+					res = acc.Name[:14]
+				}
+			}
 		}
 	} else {
 		res = acc.Name
@@ -478,9 +486,9 @@ func ShowPostGame(region, match, id string) (des, data, ban, p []string, aes []i
 	var v, blue, red string
 	fetchData(continent(strings.ToLower(region)), "lol/match/v5/matches/", match, &game)
 	for _, player := range game.Info.Participants {
-		p = append(p, player.Summoner)
-		if player.Summoner == id {
-			acc = loadAccountByID(player.Summoner)
+		p = append(p, player.SummonerName)
+		if player.SummonerID == id {
+			acc = loadAccountByID(player.SummonerID)
 			data, aes = player.data()
 			switch player.Win {
 			case true:

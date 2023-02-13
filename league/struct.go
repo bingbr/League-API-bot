@@ -166,7 +166,8 @@ type Match struct {
 }
 
 type Player struct {
-	Summoner     string    `json:"summonerId"`
+	SummonerID   string    `json:"summonerId"`
+	SummonerName string    `json:"summonerName"`
 	ChampionId   StringInt `json:"championId"`
 	ChampionName string    `json:"championName"`
 	Kill         int       `json:"kills"`

@@ -181,7 +181,7 @@ func insertTrack(channel, account string) {
 
 // Push the account to the database.
 func (acc Account) push(region, continent, compressed string) {
-	_, err := db.Exec(ctx, "insert into account (id, accid, puuid, nick, profile_icon, revision_date, summoner_level, region, continent, compressed_nick) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) on conflict (puuid) do update set id = excluded.id, accid = excluded.accid, nick = excluded.nick, profile_icon = excluded.profile_icon, revision_date = excluded.revision_date, summoner_level = excluded.summoner_level, region = excluded.region, continent = excluded.continent, compressed_nick = excluded.compressed_nick", acc.ID, acc.AccountID, acc.Puuid, acc.Name, acc.ProfileIconID, acc.RevisionDate, acc.SummonerLevel, region, continent, compressed)
+	_, err := db.Exec(ctx, "insert into account (id, accid, puuid, nick, profile_icon, revision_date, summoner_level, region, continent, compressed_nick, updated) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, now()) on conflict (puuid) do update set id = excluded.id, accid = excluded.accid, nick = excluded.nick, profile_icon = excluded.profile_icon, revision_date = excluded.revision_date, summoner_level = excluded.summoner_level, region = excluded.region, continent = excluded.continent, compressed_nick = excluded.compressed_nick, updated = excluded.updated", acc.ID, acc.AccountID, acc.Puuid, acc.Name, acc.ProfileIconID, acc.RevisionDate, acc.SummonerLevel, region, continent, compressed)
 	if err != nil {
 		log.Printf("Failed to insert account: %s", err)
 	}
@@ -532,6 +532,10 @@ func removeAccount() {
 		_, err = db.Exec(ctx, "delete from mastery where summoner = $1", ids[i])
 		if err != nil {
 			log.Printf("Failed to remove unused account champion mastery: %s", err)
+		}
+		_, err = db.Exec(ctx, "delete from track_account where summoner = $1", ids[i])
+		if err != nil {
+			log.Printf("Failed to remove account from tracked table: %s", err)
 		}
 		_, err = db.Exec(ctx, "delete from account where id = $1", ids[i])
 		if err != nil {
