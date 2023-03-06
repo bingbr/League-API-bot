@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"golang.org/x/exp/utf8string"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
@@ -295,17 +296,18 @@ func (r AccountRank) fixedStats() (res string) {
 }
 
 func (acc AccountRank) fixedName() (res string) {
-	if len([]rune(acc.Name)) > 13 {
+	s := utf8string.NewString(acc.Name)
+	if s.RuneCount() > 13 {
 		if strings.ToUpper(acc.Name) == acc.Name {
-			res = acc.Name[:13]
+			res = s.Slice(0, 13)
 		} else {
 			if strings.ToLower(acc.Name) == acc.Name {
 				res = acc.Name
 			} else {
-				if len([]rune(acc.Name)) > 14 {
-					res = acc.Name[:15]
+				if s.RuneCount() > 14 {
+					res = s.Slice(0, 15)
 				} else {
-					res = acc.Name[:14]
+					res = s.Slice(0, 14)
 				}
 			}
 		}

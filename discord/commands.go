@@ -595,7 +595,7 @@ func liveGame(session *discordgo.Session, run *sync.WaitGroup) {
 					lg[i].Update(acc[i].ID, msg.ID)
 				}
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(3 * time.Second)
 		}
 	}
 }
