@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const userAgent = "League-API-bot/1.1"
+const userAgent = "League-API-bot/1.2"
 
 // Load the required League of Legends data to use the League API.
 func LoadData() {

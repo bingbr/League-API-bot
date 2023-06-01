@@ -508,7 +508,7 @@ func (lg LiveGame) clear() {
 func removeAccount() {
 	var ids []string
 	var id string
-	resp, err := db.Query(ctx, "select id from account where updated < now() - interval '7 DAYS'")
+	resp, err := db.Query(ctx, "select id from account where updated < now() - interval '30 DAYS'")
 	if err != nil {
 		log.Printf("Querying unused accounts: %s", err)
 	}

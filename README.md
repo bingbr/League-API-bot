@@ -48,7 +48,6 @@ RIOT_TOKEN=****
 ![Print showing the leaderboard of a Discord server](/print/leaderboard.webp)
 
 
-
 ## Legal disclaimer
 > League API Bot was created under Riot Games' ["Legal Jibber Jabber"](https://www.riotgames.com/en/legal) policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 

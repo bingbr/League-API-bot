@@ -8,6 +8,7 @@ import (
 
 	"github.com/bingbr/League-API-bot/league"
 	"github.com/bwmarrin/discordgo"
+	// "github.com/joho/godotenv"
 )
 
 const guild = ""
