@@ -191,10 +191,12 @@ func (r AccountRank) mmr() (res int) {
 		res = 1200 + r.subTierMmr() + r.LeaguePoints
 	case "PLATINUM":
 		res = 1600 + r.subTierMmr() + r.LeaguePoints
-	case "DIAMOND":
+	case "EMERALD":
 		res = 2000 + r.subTierMmr() + r.LeaguePoints
-	case "MASTER", "GRANDMASTER", "CHALLENGER":
+	case "DIAMOND":
 		res = 2400 + r.subTierMmr() + r.LeaguePoints
+	case "MASTER", "GRANDMASTER", "CHALLENGER":
+		res = 2800 + r.LeaguePoints
 	}
 	return res
 }
@@ -240,6 +242,11 @@ func (acc Account) fetchRank(region string) {
 			case "RANKED_SOLO_5x5":
 				rank[i].push("rank_solo")
 			case "RANKED_TFT_DOUBLE_UP":
+				if len(rank) == 1 {
+					r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
+					r.push("rank_solo")
+				}
+			case "CHERRY":
 				if len(rank) == 1 {
 					r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
 					r.push("rank_solo")

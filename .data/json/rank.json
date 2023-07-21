@@ -16,11 +16,15 @@
         "tier":"GOLD"
     },
     {
-        "ico":"<:Platinum:967598348351701042>",
+        "ico":"<:Platinum:1131922157174276199>",
         "tier":"PLATINUM"
     },
     {
-        "ico":"<:Diamond:967598347894525973>",
+        "ico":"<:Emerald:1131922155077111828>",
+        "tier":"EMERALD"
+    },
+    {
+        "ico":"<:Diamond:1131922153873342484>",
         "tier":"DIAMOND"
     },
     {

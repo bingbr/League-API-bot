@@ -17,7 +17,7 @@ var (
 
 func OpenSession() {
 	log.Println("Connecting to PostgreSQL")
-	data, err := pgxpool.New(context.Background(), fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGDATABASE")))
+	data, err := pgxpool.New(context.Background(), fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_HOSTNAME"), os.Getenv("POSTGRES_PORT"), os.Getenv("POSTGRES_DB")))
 	if err != nil {
 		log.Printf("Database connection error: %s", err)
 	}
