@@ -218,45 +218,33 @@ func (r AccountRank) subTierMmr() (res int) {
 func (acc Account) fetchRank(region string) {
 	var rank []AccountRank
 	fetchData(region, "lol/league/v4/entries/by-summoner/", acc.ID, &rank)
-	if len(rank) != 0 {
-		for i := range rank {
-			switch rank[i].QueueType {
-			case "RANKED_FLEX_SR":
-				if len(rank) == 1 {
-					rank[i].push("rank_flex")
-					r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
-					r.push("rank_solo")
-				} else if len(rank) == 2 {
-					for a := range rank {
-						switch rank[a].QueueType {
-						case "RANKED_TFT_DOUBLE_UP":
-							r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
-							r.push("rank_solo")
-						case "RANKED_FLEX_SR":
-							rank[i].push("rank_flex")
-						}
-					}
-				} else {
-					rank[i].push("rank_flex")
-				}
-			case "RANKED_SOLO_5x5":
-				rank[i].push("rank_solo")
-			case "RANKED_TFT_DOUBLE_UP":
-				if len(rank) == 1 {
-					r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
-					r.push("rank_solo")
-				}
-			case "CHERRY":
-				if len(rank) == 1 {
-					r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
-					r.push("rank_solo")
-				}
-			}
-		}
-	} else {
-		r := AccountRank{Tier: "UNRANKED", SummonerID: acc.ID}
-		r.push("rank_solo")
+	if len(rank) == 0 {
+		blankRank(acc.ID)
+		return
 	}
+	hasTft, hasArena, hasFlex, hasSolo := false, false, false, false
+	for i := range rank {
+		switch rank[i].QueueType {
+		case "RANKED_FLEX_SR":
+			rank[i].push("rank_flex")
+			hasFlex = true
+		case "RANKED_SOLO_5x5":
+			rank[i].push("rank_solo")
+			hasSolo = true
+		case "RANKED_TFT_DOUBLE_UP":
+			hasTft = true
+		case "CHERRY":
+			hasArena = true
+		}
+	}
+	if !hasSolo && (hasFlex || hasTft || hasArena) {
+		blankRank(acc.ID)
+	}
+}
+
+func blankRank(accID string) {
+	r := AccountRank{Tier: "UNRANKED", SummonerID: accID}
+	r.push("rank_solo")
 }
 
 func (r AccountRank) info() (response string) {

@@ -59,6 +59,7 @@ func fetchData(region, path, id string, contents interface{}) {
 	res, err := client.Do(req)
 	if err != nil {
 		log.Printf("Error Do: %s", err)
+		return
 	}
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
