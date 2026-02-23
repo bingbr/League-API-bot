@@ -1,18 +1,21 @@
 module github.com/bingbr/League-API-bot
 
-go 1.20
+go 1.26
 
 require (
-	github.com/bwmarrin/discordgo v0.27.1
-	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/bwmarrin/discordgo v0.29.0
+	github.com/BurntSushi/toml v1.6.0
+	github.com/jackc/pgx/v5 v5.8.0
+	golang.org/x/sync v0.19.0
+	golang.org/x/time v0.14.0
+)
+
+require (
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
-	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgx/v5 v5.4.2
-	github.com/jackc/puddle/v2 v2.2.1 // indirect
-	github.com/joho/godotenv v1.5.1
-	golang.org/x/crypto v0.11.0 // indirect
-	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
-	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
-	golang.org/x/text v0.11.0
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	golang.org/x/crypto v0.48.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/text v0.34.0 // indirect
 )

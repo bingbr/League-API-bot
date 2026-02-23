@@ -1,0 +1,45 @@
+[riot_rate_limit]
+defaults = [
+  { requests = 1900, window = "10s", burst = 50 },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/lol/platform/v3/champion-rotations"
+limits = [
+  { requests = 30, window = "10s" },
+  { requests = 500, window = "10m" },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}"
+limits = [
+  { requests = 1000, window = "1m" },
+  { requests = 20000, window = "10s" },
+  { requests = 1200000, window = "10m" },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}"
+limits = [
+  { requests = 1600, window = "1m" },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/lol/league/v4/entries/by-puuid/{encryptedPUUID}"
+limits = [
+  { requests = 20000, window = "10s" },
+  { requests = 1200000, window = "10m" },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/lol/spectator/v5/active-games/by-summoner/{encryptedPUUID}"
+limits = [
+  { requests = 20000, window = "10s" },
+  { requests = 1200000, window = "10m" },
+]
+
+[[riot_rate_limit.endpoints]]
+path = "/lol/match/v5/matches/{matchId}"
+limits = [
+  { requests = 2000, window = "10s" },
+]

@@ -1,0 +1,31 @@
+volumes:
+  postgres_data:
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: league-api-bot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-username}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+      POSTGRES_DB: ${POSTGRES_DB:-db}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-username} -d ${POSTGRES_DB:-db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: league-api-bot
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-username}:${POSTGRES_PASSWORD:-secret}@postgres:5432/${POSTGRES_DB:-db}?sslmode=disable

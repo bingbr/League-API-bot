@@ -1,57 +1,66 @@
 # League API bot
-A Discord bot that utilizes the Riot Games API to bring the world of League of Legends into your server. With this bot, you can easily access information about your favorite players and their matches, including statistics, rankings and even the weekly free champions. You can also set up a notification so you never miss a player's game.
+
+A Discord bot that looks up League of Legends player stats, tracks live and post-game results, and shows the weekly free champion rotation. Built with Go, the Riot Games API, and PostgreSQL.
+
+### Made with
+* [GO](https://go.dev/) ([DiscordGo](https://github.com/bwmarrin/discordgo) and [pgx](https://github.com/jackc/pgx/))
+* [PostgreSQL](https://www.postgresql.org/)
 
 ## Try it now!
-### [Add this bot to your Discord server](https://discord.com/api/oauth2/authorize?client_id=961732062782562304&permissions=2147745792&scope=bot)
+### [Add to Discord](https://discord.com/oauth2/authorize?client_id=961732062782562304)
 
-## Commands available
-|      Command     | Autocomplete Option | Description |
-|:----------------:|:-------------------:|:-----------:|
-| [`/summoner`](#summoner)      | `region`            | View information about an account, such as level and rank statistics. |
-| [`/mastery`](#mastery)       | `region`, `level`   | View the status of up to 25 champions from a single account at the mastery level of your choice. |
-| [`/free champion`](#free-champion-rotation) | :x:                 | Show the latest weekly free champions rotation. |
-| [`/track config`](#configuration)  | `channel`           | Choose the #Discord-channel for live & post-game stats from a tracked account. |
-| [`/track add`](#configuration)     | `region`            | Track an account. The bot will let you know when the account start a match and when the match ends, including the result. |
-| [`/track remove`](#configuration)  | `region`            | Stop tracking an account. |
-| [`/leadboard`](#leaderboard)     | :x:                 | View the ranking of tracked accounts on the Discord server. |
-
+## Commands
+| Command | Autocomplete | Description |
+|:--------|:------------:|:------------|
+| [`/search`](#summoner) | `region` | View information about an account (level, solo/duo and flex rank). |
+| [`/free week`](#free-champion) | — | View the current free champion rotation. |
+| [`/leaderboard`](#leaderboard) | — | Show tracked players ranked by solo/duo MMR. |
+| [`/track config`](#configuration) | `channel` | Set the channel where tracking updates are posted. |
+| [`/track add`](#configuration) | `region` | Add an account to track. Posts live-game and post-game info. |
+| [`/track remove`](#configuration) | `account` | Stop tracking an account. |
 
 ## How to run in the cloud
 1. Open [Railway](https://railway.app/) or a similar cloud service
 1. Clone this repo into your `New Project`
-1. Add [Postgresql](https://docs.railway.app/databases/postgresql) database to your created environment
-1. Place your [Riot Games API token](https://developer.riotgames.com/) and your [Discord bot token](https://discord.com/developers/applications) in your League API bot `variables`.
+1. Add [Postgresql](https://docs.railway.app/databases/postgresql) database to your created project.
+1. Set your [Riot Games API key](https://developer.riotgames.com/), [Discord bot token](https://discord.com/developers/applications) and `DATABASE_URL` in your League API bot `variables`.
+
+## How to run locally
+### Prerequisites
+- [Docker](https://www.docker.com/get-started/)
+- Docker Compose
+
+1. Create your environment file:
+```bash
+cp .env.example .env
 ```
-DISCORD_TOKEN=****
-RIOT_TOKEN=****
+2. Edit `.env` and set your Discord and Riot API key:
+```env
+DISCORD_TOKEN=your_discord_bot_token
+RIOT_API_KEY=RGAPI-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+3. Start Postgres and the bot:
+```bash
+docker compose up --build -d
 ```
 
-## Print
+## Screenshots
 ### Configuration
-![Print using auto-complete to configure the account tracker](/print/track-config-autocomplete.webp)
-![Print of adding an account to be track](/print/track-add-autocomplete.webp)
-![Print with bot response to commands](/print/track.webp)
+![Using auto-complete to configure the account tracker](/screenshots/track-config-autocomplete.png)
+![Adding an account to be tracked](/screenshots/track-add-autocomplete.png)
+![Bot response to commands](/screenshots/track.png)
 
 ### Live game and post game
-![Print of live game and post-game statistics](/print/track-live-post-game.webp)
+![Live game and post-game statistics](/screenshots/track-live-post-game.png)
 
-### Free champion rotation
-![Print showing the champion's free week rotation](/print/free-week.webp)
+### Free champion
+![Champion's free week rotation](/screenshots/free-week.png)
 
 ### Summoner 
-![Print showing an account stats](/print/summoner.webp)
-
-### Mastery
-![Print showing the mastery status of champions from one account](/print/mastery.webp)
+![Account stats](/screenshots/summoner.png)
 
 ### Leaderboard
-![Print showing the leaderboard of a Discord server](/print/leaderboard.webp)
-
+![Server leaderboard](/screenshots/leaderboard.png)
 
 ## Legal disclaimer
 > League API Bot was created under Riot Games' ["Legal Jibber Jabber"](https://www.riotgames.com/en/legal) policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
-
-
-### Made with
-* [GO](https://go.dev/) ([DiscordGo](https://github.com/bwmarrin/discordgo), [GoDotEnv](https://github.com/joho/godotenv) and [pgx](https://github.com/jackc/pgx/))
-* [PostgreSQL](https://www.postgresql.org/)
