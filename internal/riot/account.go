@@ -13,9 +13,8 @@ const defaultRiotUserAgent = "League-API-bot/2.0"
 
 var validPlatformRegions = map[string]struct{}{
 	"br1": {}, "eun1": {}, "euw1": {}, "jp1": {}, "kr": {},
-	"la1": {}, "la2": {}, "na1": {}, "oc1": {}, "pbe1": {},
-	"ph2": {}, "ru": {}, "sg2": {}, "th2": {}, "tr1": {},
-	"tw2": {}, "vn2": {},
+	"la1": {}, "la2": {}, "me1": {}, "na1": {}, "oc1": {}, "pbe1": {},
+	"ru": {}, "sg2": {}, "tr1": {}, "tw2": {}, "vn2": {},
 }
 
 type RiotAccount struct {
@@ -78,9 +77,9 @@ func PlatformContinent(region string) string {
 		return "americas"
 	case "jp1", "kr":
 		return "asia"
-	case "euw1", "eun1", "ru", "tr1":
+	case "euw1", "eun1", "me1", "ru", "tr1":
 		return "europe"
-	case "ph2", "sg2", "th2", "tw2", "vn2":
+	case "sg2", "tw2", "vn2":
 		return "sea"
 	default:
 		return ""

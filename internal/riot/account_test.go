@@ -14,7 +14,7 @@ func TestPlatformContinent(t *testing.T) {
 	}{
 		{"br1", "americas"}, {"na1", "americas"}, {"la1", "americas"},
 		{"kr", "asia"}, {"jp1", "asia"},
-		{"euw1", "europe"}, {"eun1", "europe"}, {"tr1", "europe"},
+		{"euw1", "europe"}, {"eun1", "europe"}, {"tr1", "europe"}, {"me1", "europe"},
 		{"sg2", "sea"}, {"vn2", "sea"},
 		{"na", ""}, {"xx1", ""},
 	}

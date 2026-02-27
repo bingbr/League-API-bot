@@ -28,6 +28,10 @@
     "Value": "la2"
   },
   {
+    "Name": "Middle East",
+    "Value": "me1"
+  },
+  {
     "Name": "North America",
     "Value": "na1"
   },
@@ -40,24 +44,16 @@
     "Value": "pbe1"
   },
   {
-    "Name": "Philippines",
-    "Value": "ph2"
-  },
-  {
     "Name": "Russia",
     "Value": "ru"
   },
   {
-    "Name": "Singapore",
+    "Name": "Southeast Asia",
     "Value": "sg2"
   },
   {
     "Name": "Taiwan",
     "Value": "tw2"
-  },
-  {
-    "Name": "Thailand",
-    "Value": "th2"
   },
   {
     "Name": "Turkey",
